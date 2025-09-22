@@ -1,0 +1,59 @@
+<div>
+  <h3>Add Student</h3>
+  <form (ngSubmit)="addStudent()">
+    <input
+      type="text"
+      [(ngModel)]="newStudent.name"
+      name="name"
+      placeholder="Name"
+      required
+    />
+    <input
+      type="email"
+      [(ngModel)]="newStudent.email"
+      name="email"
+      placeholder="Email"
+      required
+    />
+    <button type="submit">Add</button>
+  </form>
+</div>
+
+<hr />
+
+@if(editingStudent){
+<div>
+  <h3>Edit Student</h3>
+  <input [(ngModel)]="editingStudent.name" placeholder="Name" />
+  <input [(ngModel)]="editingStudent.email" placeholder="Email" />
+  <button (click)="updateStudent()">Update</button>
+  <button (click)="editingStudent = null">Cancel</button>
+</div>
+}
+
+<hr />
+
+<h3>All Student</h3>
+<table border="1">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (student of students; track student.id) {
+    <tr>
+      <td>{{ student.id }}</td>
+      <td>{{ student.name }}</td>
+      <td>{{ student.email }}</td>
+      <td>
+        <button (click)="editStudent(student)">Edit</button>
+        <button (click)="deleteStudent(student.id!)">Delete</button>
+      </td>
+    </tr>
+    }
+  </tbody>
+</table>
